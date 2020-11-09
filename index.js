@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 const Dishes = require("./models/dishes");
 
 const url = "mongodb://localhost:27017/conFusion";
-const connect = mongoose.connect(url);
+const connect = mongoose.connect(url, { useNewUrlParser: true });
+//mongoose.connect = (url, { useNewUrlParser: true });
 
 connect.then((db) => {
   console.log("Connected correctly to the server");
@@ -21,7 +22,7 @@ connect.then((db) => {
     })
     .then((dishes) => {
       console.log(dishes);
-      return Dishes.remove({});
+      return Dishes.deleteOne({});
     })
     .then(() => {
       return mongoose.connection.close();
